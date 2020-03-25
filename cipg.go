@@ -11,7 +11,7 @@ import (
 func Generate(opt interface{}, logger func(i ...interface{})) {
 	generateValue(reflect.ValueOf(opt), "", "")
 	flag.Parse()
-	printValue(reflect.ValueOf(opt), "", func(i ...interface{}) { logger(i...) })
+	printValue(reflect.ValueOf(opt), "", logger)
 	return
 }
 

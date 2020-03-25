@@ -7,6 +7,7 @@ import (
 	"gopkg.in/yaml.v3"
 	"io/ioutil"
 	"os"
+	"reflect"
 )
 
 //If -UseConfigFile flag is set, then generate options from the yaml file.
@@ -29,8 +30,9 @@ func generateWithFile(opt interface{}, logger func(i ...interface{}),
 	exit = false
 	file := flag.String("UseOptionFile", "", "Set this value to load option from a config file.")
 	gfile := flag.String("GenerateOptionFile", "", "Set this value to generate a option file.")
-	Generate(opt, logger)
+	generateValue(reflect.ValueOf(opt), "Option", "")
 	flag.Parse()
+	printValue(reflect.ValueOf(opt), "Option", logger)
 	if path := *file; path != "" {
 		logger(fmt.Sprintf("-UseConfigFile flag detected, load option from %s.", path)) //文件读取模式
 		data, err := ioutil.ReadFile(path)                                              //读取文件
