@@ -32,7 +32,7 @@ func generateWithFile(opt interface{}, logger func(i ...interface{}),
 	gfile := flag.String("GenerateOptionFile", "", "Set this value to generate a option file.")
 	generateValue(reflect.ValueOf(opt), "Option", "")
 	flag.Parse()
-	printValue(reflect.ValueOf(opt), "Option", logger)
+	printValue(reflect.ValueOf(opt), "", logger)
 	if path := *file; path != "" {
 		logger(fmt.Sprintf("-UseConfigFile flag detected, load option from %s.", path)) //文件读取模式
 		data, err := ioutil.ReadFile(path)                                              //读取文件
