@@ -1,30 +1,10 @@
-# cipg
+package cipg
 
-Command line parameter generator.
+import (
+	"testing"
+	"time"
+)
 
-## Usage
-
-1. Create a option struct for your application.
-2. Put some strings into the tag for introducing usage.
-3. Instantiate the option and put the default value into it.
-4. Call `cipg.Generate(...)` to generate command line parameters according to the option.
-
-## Supported base types
-
-```go
-bool
-int
-int64
-uint
-uint64
-string
-float64
-struct
-```
-
-## Example
-
-```go
 type Option struct {
 	DurationOpt time.Duration `usage:"Option used for time.Duration variable."`
 	BoolOpt     bool          `usage:"Option used for bool variable."`
@@ -71,8 +51,7 @@ func DefaultOption() Option {
 	}
 }
 
-func main() {
+func TestGenerate(t *testing.T) {
 	opt := DefaultOption()
-	Generate(&opt, fmt.Println)
+	Generate(&opt, t.Log)
 }
-```
